@@ -1,0 +1,32 @@
+<div class="row align-items-center btn">
+    <button
+        *ngFor="let lang of langs"
+        mat-stroked-button
+        (click)="onClick(lang)"
+        class="button-color"
+    >
+        {{ lang }}
+    </button>
+</div>
+
+<div class="search-box">
+    <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label class="lable">Search Movie</mat-label>
+        <input class="input-lang" matInput [matAutocomplete]="auto" [formControl]="searchForm">
+        <button mat-icon-button matSuffix (click)="onSearch(searchForm.value)">
+            <mat-icon>search</mat-icon>
+        </button>
+        <mat-autocomplete #auto="matAutocomplete" class="auto-complete" autoActiveFirstOption [displayWith]="displayFn"
+            #scroller>
+            <mat-option *ngFor="let option of $movieList | async" [value]="option" class="options">
+                <div class="row align-items-center">
+                    <img class="example-option-img" aria-hidden
+                        [src]="option.image ? option.image : 'assets/no_poster.jpg'" height="40">
+                    <div class="text-drop">
+                        <p>{{ option.title }}</p>
+                    </div>
+                </div>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</div>

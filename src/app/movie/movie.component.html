@@ -1,0 +1,38 @@
+<div class="arrow">
+  <button [routerLink]="['/movies']" mat-icon-button class="button-color"><mat-icon>arrow_back</mat-icon></button>
+</div>
+<div *ngIf="$movie | async as movie" class="container">
+  <div class="row column-md main-head">
+    <div class="poster-section">
+      <img [src]="movie.image ? movie.image : 'assets/no_poster.jpg'" alt="">
+    </div>
+    <div class="tv-details">
+      <h3 class="title">{{movie.title}}</h3>
+      <h4 class="title-header" *ngIf="movie.description">description :</h4>
+      <div class="p-t-1"></div>
+      <p class="overview">{{movie.description}}</p>
+      <div class="p-tb-1"></div>
+      <!-- <div #video style="width: 400px; height: 300px;"></div>
+      <div class="p-tb-1"></div> -->
+      <div *ngFor="let link of movie.other_links">
+        <h4 class="genres">{{link.type}}</h4>
+        <a class="genres" [href]="link.url" target="_blank">{{link.url}}</a>
+        <div class="p-tb-1"></div>
+      </div>
+      <div class="p-tb-1"></div>
+      <div class="p-tb-1"></div>
+      <div class="row align-items-center magnet">
+        <div *ngFor="let link of movie.torrent" class="column align-items-center">
+          <p class="watch-line">Size: {{link.size}}</p>
+          <a [href]="movie.url+link.magnet" target="_blank">
+            <button mat-stroked-button class="button-color">{{link.quality}}</button>
+          </a>
+        </div>
+      </div>
+
+      <a [href]="movie.url" target="_blank" rel="noopener noreferrer">{{movie.url}}</a>
+    </div>
+  </div>
+</div>
+
+<div #video style="text-align: center;"></div>

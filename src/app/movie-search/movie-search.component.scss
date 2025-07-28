@@ -1,0 +1,42 @@
+.search-box {
+    width: calc(100% - 80px);
+    margin: 0px 40px;
+    padding-top: 10px;
+}
+.example-full-width {
+    width: 100%;
+    color: var(--text-color);
+  }
+.btn {
+    width: calc(100% - 80px);
+    margin: 0px 40px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 20px;
+    justify-content: center;
+}
+.btn > button {
+    text-transform: capitalize;
+}
+.options span {
+    color: var(--text-color);
+  }
+  
+  .options:hover {
+    background-color: var(--app-background) !important;
+  }
+  
+  .mat-option.mat-active {
+    background-color: var(--app-background) !important;
+  }
+  
+  .lable {
+    color: var(--text-color);
+  }
+
+.button-color {
+    color: var(--text-color) !important;
+    border-color: var(--text-color) !important;
+    padding: 0px 10px !important;
+    width: 100px;
+}
