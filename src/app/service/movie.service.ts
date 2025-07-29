@@ -40,8 +40,8 @@ export class MovieService {
     this.activeThem.next(name);
   }
 
-  public getURL(): Observable<any> {
-    return this.http.get<any>('https://gradehgplus.com/4y27ls6lacv9', {
+  public getURL(url: string): Observable<any> {
+    return this.http.get<any>(url, {
       headers: this.header,
       responseType: 'text' as 'json'
     });

@@ -83,8 +83,8 @@
 .button-color {
     color: var(--text-color) !important;
     border-color: var(--text-color) !important;
-    padding: 0px 10px !important;
-    width: 100px;
+    padding: 13px 11px !important;
+    width: 50px;
 }
 .watch-line {
     color: var(--text-color) !important;
@@ -102,6 +102,7 @@
 }
 .magnet {
     gap: 40px;
+    flex-wrap: wrap;
 }
 .magnet .column {
     gap: 10px;

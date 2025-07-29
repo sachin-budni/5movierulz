@@ -20,35 +20,48 @@ export class MovieComponent implements OnInit {
     const { url } = this.route.snapshot.queryParams as any;
     if (url){
       this.$movie = this.mvService.getMovie(url);
-      this.setVideo();
+      this.$movie.subscribe(movie => {
+        if (movie && movie.other_links && movie.other_links.length > 0) {
+          const videoLink = movie.other_links.forEach(link => {
+            this.setVideo(link.url);
+          });
+        } else {
+          console.error('No torrent available for this movie');
+        }
+      });
     }
-
-    this.mvService.getURL()
-    .subscribe(url => {
-      const div: HTMLDivElement = document.createElement('div');
-      div.innerHTML = url;
-      const iframe: string = div.querySelector('textarea#iet')?.textContent || '';
-      this.videoElement.nativeElement.innerHTML = iframe;
-      // const list = ['#adbd','#advert1', '#advert2', '#advert3'];
-      // list.forEach(selector => {
-      //   const element = div.querySelector(selector);
-      //   if (element) {
-      //     element.remove();
-      //   }
-      // });
-    });
   }
-  setVideo(): void {
-    // this.$movie.subscribe(movie => {
-    //   if (movie && movie.other_links && movie.other_links.length > 0) {
-    //     const videoHTML = `<video controls style="width: 100%; height: 100%;">
-    //       <source src="${movie.torrent[0].magnet}" type="video/mp4">
-    //       Your browser does not support the video tag.
-    //     </video>`;
-    //     this.videoElement.nativeElement.innerHTML = videoHTML;
-    //   } else {
-    //     this.videoElement.nativeElement.innerHTML = '<p>No video available</p>';
-    //   }
+  createIframe(url: string): HTMLIFrameElement {
+    const iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.frameBorder = '0';
+    iframe.marginWidth = '0';
+    iframe.marginHeight = '0';
+    iframe.allowFullscreen = true;
+    return iframe;
+  }
+  setVideo(url: string): void {
+    // const videoUrl = 'https://hglink.to/e' + url.substring(url.indexOf('.com/') + 4);
+    this.videoElement.nativeElement.appendChild(this.createIframe(url));
+
+
+
+
+    // <IFRAME SRC="https://hglink.to/e/4y27ls6lacv9" FRAMEBORDER=0 MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING=NO WIDTH=640 HEIGHT=360 allowfullscreen></IFRAME>
+
+    // this.mvService.getURL(url1)
+    // .subscribe(url => {
+    //   const div: HTMLDivElement = document.createElement('div');
+    //   div.innerHTML = url;
+    //   const iframe: string = div.querySelector('textarea#iet')?.textContent || '';
+    //   this.videoElement.nativeElement.innerHTML = iframe;
+    //   // const list = ['#adbd','#advert1', '#advert2', '#advert3'];
+    //   // list.forEach(selector => {
+    //   //   const element = div.querySelector(selector);
+    //   //   if (element) {
+    //   //     element.remove();
+    //   //   }
+    //   // });
     // });
   }
 
